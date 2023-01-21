@@ -63,62 +63,122 @@ def gini_index(Y: pd.Series) -> float:
     pass
 
 
-def information_gain(Y: pd.Series, attr: pd.Series) -> float:
-    """
-    Function to calculate the information gain
-    """
 
-    # df_out = pd.crosstab(attr, Y, normalize = True)
-    
-    # weights={}
-    # n = Y.size()
+def information_gain(Y, attr, criterion = None):
 
-    # for x in attr.unique():
-    #     weights[x]=0
-    
-    # for vals in attr:
-    #     weights[vals]+=1
-    
-    # for w in weights:
-    #     w = w/n
+  ## DISCRETE INPUT AND DISCRETE OUTPUT USING INFORMATION GAIN
+  if(Y.dtype.name == "category" and attr.dtype.name == "category" and criterion == "information_gain"):
+    parent_entropy = entropy(Y) # Calculating the entropy of the parent node
+    total_size = Y.size
+    classes = np.unique(attr) # Getting a list of all the unique classes from our attribute (all unique values in our column)
+    child_entropy = 0
+    for i in classes:
+      curr_class = Y[attr == i] # Masking our Series with the condition attr == i
+      class_entropy = entropy(curr_class) # Calculating the entropy for each class
+      child_entropy += (curr_class.size/total_size) * class_entropy # Taking the weighted average of the entropies of each class
+    return parent_entropy - child_entropy
 
-    n = Y.size
-    init_entropy=entropy(Y)
+  ## DISCRETE INPUT AND DISCRETE OUTPUT USING GINI INDEX
+  elif(Y.dtype.name == "category" and attr.dtype.name == "category" and criterion == "gini_index"):
+    parent_gini = gini_index(Y) # Calculating the entropy of the parent node
+    total_size = Y.size
+    classes = np.unique(attr) # Getting a list of all the unique classes from our attribute (all unique value in our column)
+    child_gini = 0
+    for i in classes:
+      curr_class = Y[attr == i] # Masking our Series with the condition attr = i
+      class_gini = gini_index(curr_class) # Calculating the gini index for each class
+      child_gini += (curr_class.size/total_size) * class_gini # Taking weighted average of the gini indexes of each class
+    return parent_gini - child_gini
   
+  ## REAL INPUT AND DISCRETE OUTPUT
+  elif(Y.dtype.name == "float64" and attr.dtype.name == "category"):
+    #merging the two Series together so I can get a merged dataframe which can be sorted together while retaining the index.
+    table = pd.concat([attr,Y],axis=1).reindex(attr.index)
+    table.columns = ["attribute","output"]
 
-    unique_attr = attr.unique()
-    weights={}
+    #sorting step
+    table.sort_values(by=["attribute","output"],inplace=True)
 
-    for attribute_val in unique_arr:
-        weights[attribute_val]=0
+    values = table['attribute']
+    output = table['output']
+
+    optimum_split = None
+    maximum_gain = -np.inf
+    current_split = None
+
+    if(criterion=="information_gain"):
+      initial_disagreement = entropy(Y)
+    elif(criterion=="gini_index"):
+      initial_disagreement = gini_index(Y)
     
-    for i in range(attr.size):
-        weights[attr[i]]+=1
-    
-    for val in weights.values():
-        val = val/n
-    
-    table = pd.crosstab(attr, Y, normalize=True)
+    current_disagreement=None
 
-    s=0
-    for i in range(len(unique_attr)):
-        s+=get_entropy(table.loc[unique_attr[i]])*weights[unique_attr[i]]
-    
-    return init_entropy-s
+    for i in range(1,len(values)):
 
+      #skipping those splits where the values don't change, only checking those splits around which transitions occur
+      if(values[i]==values[i-1]):
+        continue
 
-    pass
+      current_split = (values[i]+values[i-1])/2
+      split_one = output[values<=current_split]
+      split_two = output[values>current_split]
 
+      if(criterion=="information_gain"):
+        component_one = (split_one.size()/output.size())*(entropy(split_one))
+        component_two = (split_two.size()/output.size())*(entropy(split_two))
+      elif(criterion=="gini_index"):
+        component_one = (split_one.size()/output.size())*(gini_index(split_one))
+        component_two = (split_two.size()/output.size())*(gini_index(split_two))
 
-def get_entropy(Y: pd.Series) -> float:
-    """
-    Function to calculate the entropy of the dataset
-    """
+      current_disagreement = 0
+      current_disagreement = component_one + component_two
 
-    n = Y.size
-    s=0
-    for i in range(n):
-        s+=(-1*Y[i]*(m.log2(Y[i])))
-    
-    return s
-    pass
+      if(initial_disagreement-current_disagreement>maximum_gain):
+        maximum_gain = initial_disagreement-current_disagreement
+        optimum_split = current_split
+
+      return {maximum_gain,optimum_split}
+
+  ## DISCRETE INPUT AND REAL OUTPUT
+  elif(Y.dtype.name == "float64" and attr.dtype.name == "category"):
+    parent_variance = np.var(Y) # Calculating the variance of the parent node
+    total_size = Y.size
+    classes = np.unique(attr) # Getting a list of all the unique classes from our attribute
+    child_variance = 0
+    for i in classes:
+      curr_class = Y[attr == i] # Masking our Series with the condition attr = i
+      class_variance = np.var(curr_class) # Calculating the variance for each clas
+      child_variance += (curr_class.size/total_size) * class_variance # Taking weighted average of the variances of each class
+    return parent_variance - child_variance
+
+  ## REAL INPUT AND REAL OUTPUT
+  elif(Y.dtype.name == "float64" and attr.dype.name == "float64"):
+    #merging the two Series together so I can get a merged dataframe which can be sorted together while retaining the index.
+    table = pd.concat([attr,Y],axis=1).reindex(attr.index)
+    table.columns = ["attribute","output"]
+
+    #sorting step
+    table.sort_values(by=["attribute","output"],inplace=True)
+
+    values = table['attribute']
+    output = table['output']
+
+    optimum_split = None
+    maximum_gain = -np.inf
+    current_split = None
+    parent_variance = np.var(Y)
+    total_size = Y.size
+
+    for i in range(1, len(values)):
+      if(values[i] == values[i-1]):
+        continue
+      current_split = (values[i] + values[i-1]) / 2
+      split_one = output[values<=current_split]
+      split_two = output[values>current_split]
+      overall_variance = parent_variance
+      overall_variance -= (split_one.size / total_size) * np.var(split_one)
+      overall_variance -= (split_two.size / total_size) * np.var(split_two)
+      if(overall_variance > maximum_gain):
+        maximum_gain = overall_variance
+        optimum_split = current_split
+      return {maximum_gain, optimum_split}
