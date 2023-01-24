@@ -73,7 +73,7 @@ def experiment(N, M):
         x_axis = np.arange(1, N+1)
         y_axis = np.arange(1, M+1)
         ## Looping for the different values of N and M
-        ## N ranges from 0 to 30, M ranges from 0 to 5
+        ## N ranges from 1 to 30, M ranges from 1 to 5
         for n in range(1, N+1):
             for m in range(1, M+1):
                 # Temporary arrays to store the learning and predicting time 
