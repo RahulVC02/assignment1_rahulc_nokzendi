@@ -44,7 +44,7 @@ The prediction time complexity for this case would depend on the depth of the tr
       <li> Predicting Average Time </li>
         <img src="Heatmap Plot Images/RIRO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
-        <img src="Heatmap Plot Images/RIRO predictibg std.png" height ="500" width="700">
+        <img src="Heatmap Plot Images/RIRO predicting std.png" height ="500" width="700">
     </ol>
       
   
@@ -57,7 +57,7 @@ The prediction time complexity for this case would depend on the depth of the tr
       <li> Predicting Average Time </li>
         <img src="Heatmap Plot Images/RIDO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
-        <img src="Heatmap Plot Images/RIDO predictibg std.png" height ="500" width="700">
+        <img src="Heatmap Plot Images/RIDO predicting std.png" height ="500" width="700">
     </ol>
       
   
@@ -71,7 +71,7 @@ The prediction time complexity for this case would depend on the depth of the tr
       <li> Predicting Average Time </li>
         <img src="Heatmap Plot Images/DIRO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
-        <img src="Heatmap Plot Images/DIRO predictibg std.png" height ="500" width="700">
+        <img src="Heatmap Plot Images/DIRO predicting std.png" height ="500" width="700">
     </ol>
       
   
@@ -84,7 +84,7 @@ The prediction time complexity for this case would depend on the depth of the tr
       <li> Predicting Average Time </li>
         <img src="Heatmap Plot Images/DIDO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
-        <img src="Heatmap Plot Images/DIDO predictibg std.png" height ="500" width="700">
+        <img src="Heatmap Plot Images/DIDO predicting std.png" height ="500" width="700">
     </ol>     
 </ol>
   
