@@ -37,38 +37,54 @@ The prediction time complexity for this case would depend on the depth of the tr
 <ol>
   <li><h4> Real Input, Real Output </h4></li>
     <ol>
-      <li> Learning Average Time </li>
+      <li> Learning Average Time</li>
+        <img src="Heatmap Plot Images/RIRO learning time.png" height ="500" width="700">
       <li> Learning Standard Deviation </li>
+        <img src="Heatmap Plot Images/RIRO learning std.png" height ="500" width="700">
       <li> Predicting Average Time </li>
+        <img src="Heatmap Plot Images/RIRO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
+        <img src="Heatmap Plot Images/RIRO predictibg std.png" height ="500" width="700">
     </ol>
       
   
   <li><h4> Real Input, Discrete Output </h4></li>
     <ol>
-      <li> Learning Average Time </li>
+      <li> Learning Average Time</li>
+        <img src="Heatmap Plot Images/RIDO learning time.png" height ="500" width="700">
       <li> Learning Standard Deviation </li>
+        <img src="Heatmap Plot Images/RIDO learning std.png" height ="500" width="700">
       <li> Predicting Average Time </li>
+        <img src="Heatmap Plot Images/RIDO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
+        <img src="Heatmap Plot Images/RIDO predictibg std.png" height ="500" width="700">
     </ol>
       
   
   
   <li><h4> Discrete Input, Real Output </h4></li>
     <ol>
-      <li> Learning Average Time </li>
+      <li> Learning Average Time</li>
+        <img src="Heatmap Plot Images/DIRO learning time.png" height ="500" width="700">
       <li> Learning Standard Deviation </li>
+        <img src="Heatmap Plot Images/DIRO learning std.png" height ="500" width="700">
       <li> Predicting Average Time </li>
+        <img src="Heatmap Plot Images/DIRO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
+        <img src="Heatmap Plot Images/DIRO predictibg std.png" height ="500" width="700">
     </ol>
       
   
   <li><h4> Discrete Input, Discrete Output </h4></li>
     <ol>
-      <li> Learning Average Time </li>
+      <li> Learning Average Time</li>
+        <img src="Heatmap Plot Images/DIDO learning time.png" height ="500" width="700">
       <li> Learning Standard Deviation </li>
+        <img src="Heatmap Plot Images/DIDO learning std.png" height ="500" width="700">
       <li> Predicting Average Time </li>
+        <img src="Heatmap Plot Images/DIDO predicting time.png" height ="500" width="700">
       <li> Predicting Standard Deviation </li>
+        <img src="Heatmap Plot Images/DIDO predictibg std.png" height ="500" width="700">
     </ol>     
 </ol>
   
