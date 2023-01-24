@@ -35,11 +35,41 @@ The prediction time complexity for this case would depend on the depth of the tr
 <h3> Plots </h3>
 
 <ol>
-  <li><h4> Real Input, Real Output </h4>
+  <li><h4> Real Input, Real Output </h4></li>
     <ol>
-      <li> Learning Average Time 
-      </li>
+      <li> Learning Average Time </li>
+      <li> Learning Standard Deviation </li>
+      <li> Predicting Average Time </li>
+      <li> Predicting Standard Deviation </li>
+    </ol>
       
-  </li>
+  
+  <li><h4> Real Input, Discrete Output </h4></li>
+    <ol>
+      <li> Learning Average Time </li>
+      <li> Learning Standard Deviation </li>
+      <li> Predicting Average Time </li>
+      <li> Predicting Standard Deviation </li>
+    </ol>
+      
+  
+  
+  <li><h4> Discrete Input, Real Output </h4></li>
+    <ol>
+      <li> Learning Average Time </li>
+      <li> Learning Standard Deviation </li>
+      <li> Predicting Average Time </li>
+      <li> Predicting Standard Deviation </li>
+    </ol>
+      
+  
+  <li><h4> Discrete Input, Discrete Output </h4></li>
+    <ol>
+      <li> Learning Average Time </li>
+      <li> Learning Standard Deviation </li>
+      <li> Predicting Average Time </li>
+      <li> Predicting Standard Deviation </li>
+    </ol>     
+</ol>
   
 
