@@ -1,8 +1,8 @@
 <h3>Theoretical time complexity:</h3>
 
 
-The time complexity depends on the output size and the number of attributes in the input data table. Additionally, the input type (continuous or discrete) can also affect the complexity. The following are the variables used- 
-1. Output size or the number of data points- $N$
+The time complexity depends on the input size and the number of attributes in the input data table. Additionally, the input type (continuous or discrete) can also affect the complexity. The following are the variables used- 
+1. Input size or the number of data points- $N$
 2. Number of attributes or columns in the input - $M$
 3. The number of unique values in the $i^{th}$ column in the input table - $d_i$
 
@@ -10,12 +10,12 @@ Now, going through the different cases:
 
 <h4>1. Real input values: </h4>
 
-Since we are splitting the data table into two at each step without deleting any column, in the worst-case scenario, there can be a total of $(N-1)$ nodes in the decision tree. Hence, in the worst-case scenario, the code will run a total of $N-1$ times. In every iteration of the code, each of the columns present in the table has to be passed to the information gain function to obtain the column with the best information gain in order to carry out the appropriate spilt. Thus, this will occur a total of $M$ times. The time complexity of the information function will be $O(N^2)$ since it takes $O(N)$ to calculate the information for a given split, and there are a total of $(N-1)$ splits. Thus, each iteration will have a time complexity of $O(N^2M)$. 
+Since we are splitting the data table into two at each step without deleting any column, in the worst-case scenario, there can be a total of $(N-1)$ non-leaf nodes in the decision tree. Hence, in the worst-case scenario, the code will run a total of $N-1$ times. In every iteration of the code, each of the columns present in the table has to be passed to the information gain function to obtain the column with the best information gain in order to carry out the appropriate spilt. Thus, this will occur a total of $M$ times. The time complexity of the information function will be $O(N^2)$ since it takes $O(N)$ to calculate the information for a given split, and there are a total of $(N-1)$ splits. Thus, each iteration will have a time complexity of $O(N^2M)$. 
 
 Hence the complexity for the case of real inputs will be $O(N^3M)$. This is the Learning Time Complexity.
 
 The Prediction Time Complexity depends on the depth of the tree. In the worst case, the sample input to be predicted would reach the leaf at the lowest level - the
-depth of the tree. This prediction would have to go through all the $(N-1)$ splits and so the Prediction Time Complexity would be $O(N)$.
+depth of the tree. This prediction would have to go through all the $(N-1)$ splits and so the Prediction Time Complexity would be $O(N)$ per input. If the input test size is $N'$, the total pediction time is $O(NN')$.
 
 <h4>2. Discrete input values: </h4>
 
@@ -27,9 +27,9 @@ In the case that the product of all unique attributes from each of the columns i
 
 In each of the iterations, the code will pass all the columns present in the table to the information gain function. Thus, the information gain function is run a total of $O(M)$ times in each of the iterations. The complexity of this function is equal to the size of the input series since it has to just pass the series twice in order to find the information gain. Thus, each iteration of the code will have a time complexity of $O(NM)$. 
 
-Hence the learning time complexity for the case of discrete inputs will be $O(min(D, N-1)(NM))$.
+Hence the learning time complexity for the case of discrete inputs will be $O(min(D, N-1) * (NM))$.
 
-The prediction time complexity for this case would depend on the depth of the tree. In the worst case, every one of the $M$ attributes would occur as a decision node in the path from root to leaf and so we would ask $M$ questions with the depth of the tree being equal to $M$. So, the prediction time complexity would be $O(M)$. 
+The prediction time complexity for this case would depend on the depth of the tree. In the worst case, every one of the $M$ attributes would occur as a decision node in the path from root to leaf and so we would ask $M$ questions with the depth of the tree being equal to $M$. So, the prediction time complexity would be $O(M)$ per input. If the input test size is $N'$, the total pediction time is $O(MN')$.
 
 
 <h3> Plots </h3>
@@ -88,4 +88,13 @@ The prediction time complexity for this case would depend on the depth of the tr
     </ol>     
 </ol>
   
-
+<h3>Observations:</h3>
+<ol>
+  <li> The learning time for all cases increase as we increase $N$ and $M$ </li>
+  <li> The predicting time for all cases depends on $N$ and $M$. </li>
+  <li> The learning time for real inputs take more time than the learning time for discrete inputs by around a factor of $10$. This can depend on $N$ and $M$ and the difference may become larger with larger values of $N$ and $M$. </li>
+  <li> The predicting time taken for each case is much less than the learning time for that case. </li>
+  <li> The standard deviation for the learning and predicting time for each case is lower than the time taken for the same. This means that the test runs were done in a relatively stable state of our machine. </li>
+  <li> The predicting time for real inputs seems to be more depended on $M$ rather than $N$ from the heat map. However, in order to fully test the asymtotic behaviour of the predicting time, we need to test it for large values of $N$ and $M$. </li>
+  <li> Our testing values for $N$ and $M$ are small due to constraints on our time and machine. The running time for the learning and predicting time is also not truly the running time as we are running it in our local machine with the OS performing multiple processes at once. One way to handle this is to take the average time over multiple iterations $(K)$. We have implemented this as well. The heat maps are all for $K = 3$. We can increase this number to improve our readings. </li>
+</ol>
