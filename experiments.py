@@ -5,6 +5,7 @@ import time
 import matplotlib.pyplot as plt
 from tree.base import DecisionTree
 from metrics import *
+from tqdm import tqdm
 
 np.random.seed(42)
 num_average_time = 100
@@ -64,7 +65,7 @@ def plot_values(data, x_axis, y_axis, title):
 
 def experiment(N, M):
     ## Looping for all the four cases {i: Case == 0: RIRO, 1: RIDO, 2: DIDO, 3: DIRO}
-    for i in range(0, 4):
+    for i in tqdm(range(0, 4)):
         # Initializing the arrays to store the learning and predicting time
         learning_time = np.arange(N*M).reshape(N, M).astype(float)
         predicting_time = np.arange(N*M).reshape(N, M).astype(float)
