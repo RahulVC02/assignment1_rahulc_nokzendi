@@ -90,10 +90,10 @@ The prediction time complexity for this case would depend on the depth of the tr
   
 <h3>Observations:</h3>
 <ol>
-  <li> The learning time for all cases increase as we increase $N$ and $M$ </li>
+  <li> The learning time for all cases increase as we increase $N$ and $M$. </li>
   <li> The predicting time for all cases depends on $N$ and $M$. </li>
   <li> The learning time for real inputs take more time than the learning time for discrete inputs by around a factor of $10$. This agrees with our theoretical complexities as well because real inputs take an additional factor of $N$ in their asymptotic complexities. This can depend on $N$ and $M$ and the difference may become larger with larger values of $N$ and $M$. </li>
-  <li> The predicting time taken for each case is much less than the learning time for that case. This also agrees with our reported theoretical complexities which are smaller by a factor of at least $N$ </li>
+  <li> The predicting time taken for each case is much less than the learning time for that case. This also agrees with our reported theoretical complexities which are smaller by a factor of at least $N$. </li>
   <li> The standard deviation for the learning and predicting time for each case is lower than the time taken for the same. This means that the test runs were done in a relatively stable state of our machine. </li>
   <li> The predicting time for real inputs seems to be more depended on $M$ rather than $N$ from the heat map. However, in order to fully test the asymtotic behaviour of the predicting time, we need to test it for large values of $N$ and $M$. </li>
   <li> Our testing values for $N$ and $M$ are small due to constraints on our time and machine. The running time for the learning and predicting time is also not truly the running time as we are running it in our local machine with the OS performing multiple processes at once. One way to handle this is to take the average time over multiple iterations $(K)$. We have implemented this as well. The heat maps are all for $K = 3$. We can increase this number to improve our readings. </li>
